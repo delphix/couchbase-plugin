@@ -1,4 +1,0 @@
-dvp==2.1.0
-pytest==4.6.10
-pytest-cov
-pytest-html
