@@ -1,0 +1,142 @@
+.code_box_outer{
+    border-radius:5px;
+    border:1px solid #dedede;
+    background-color:#f1f1f1;
+}
+.code_box_title{
+    background-color:#ffffff;
+    border-bottom:1px solid #dedede;
+    padding:10px 15px;
+}
+.code_title{
+    color:#7c4dff;
+    font-weight:bold;
+    font-size:12px;
+}
+.data_highlight{
+    color:#1AD6F5;
+    #color:#7c4dff;
+    font-size:16px;
+}
+
+.md-sidebar--secondary {
+    display: none !important;
+}
+
+.italic{
+    font-style: italic;
+}
+.cmd{
+    padding:2px 7px 2px 7px;
+    margin:5px;
+    border: 1px solid lightgrey;border-radius: 7px;
+}
+
+.table-header{
+    font-size:15px;
+    font-weight: normal !important;
+    font-family: "Lato", "proxima-nova", "Helvetica Neue", Arial, sans-serif;
+    margin-right:40px;
+}
+th{
+    color: white;
+    background: gray;
+}
+.ml20{
+    margin-left: 40px;
+}
+.mini-text{
+    font-size:15px;
+}
+.micro-text{
+    font-size:13px;
+}
+.nano-text{
+    font-size:11px;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+/* Page Background*/
+/*.md-container{*/
+/*    background: transparent linear-gradient(to bottom,rgba(201,245,252,0.8) 0%,rgba(255,255,255,0) 94%);*/
+/*}*/
+/* Search radius*/
+.md-search__form{
+    border-radius: 15px;
+}
+
+/* Logo resize*/
+.md-header__button.md-logo img, .md-header__button.md-logo svg {
+    max-width: 120px;
+}
+/* Change height and background of nav*/
+.md-header{
+    min-height: 80px;
+    /*background-color: #E1F9FE;*/
+}
+.md-header__inner{
+    padding:0.5rem 0.2rem;
+}
+.md-ellipsis{
+    font-size:1.4rem;
+    font-weight: 500;
+}
+/* Change height and background of nav*/
+
+/* Hide nav title */
+.md-nav__title{
+    display:none !important;
+}
+
+/* sidebar */
+.md-sidebar{
+    width:13rem;
+}
+
+
+
+
+/* Colors  */
+.gray {
+    color: gray;
+}
+.required{
+    color: #f06090;
+}
+
+
+/* Overriding defaults */
+.md-typeset {
+    font-size: .7rem !important;
+}
+.md-footer-copyright{
+    display:none !important;
+}
+
+.features{
+    font-weight:normal !important;
+    font-family: "Lato", "proxima-nova", "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.75rem;
+    color:grey;
+}
+
+p > img {
+    border: 2px solid purple;
+    border-radius: 15px;
+}
+
+.pL30{
+    padding-left: 30px;
+}
+.pL15{
+    padding-left: 15px;
+}
+
+
+/* Hiding Copyright */
+.md-copyright{
+    display:none;
+}
