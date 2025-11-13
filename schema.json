@@ -58,12 +58,20 @@
     "properties": {
       "couchbaseSrcHost": {
         "type": "string",
+        "pattern": "^(([1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.([1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])|([a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?\\.)*(localhost|[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?))$",
+        "maxLength": 255,
         "prettyName": "Source Host",
         "description": "",
-        "default": ""
+        "dxFormProperties": {
+          "validationMessages": {
+            "pattern": "Please provide a valid IP address or hostname."
+          }
+        }
       },
       "couchbaseSrcPort": {
         "type": "integer",
+        "minimum": 1,
+        "maximum": 65535,
         "prettyName": "Source Couchbase Port",
         "description": "",
         "default": 8091
@@ -71,15 +79,15 @@
       "dbPath": {
         "type": "string",
         "format": "unixpath",
+        "pattern": "^\\/([^\\/\\0<>|*?\"\\\\;&$]+\\/)*([^\\/\\0<>|*?\"\\\\;&$]+)?\\/?$",
         "prettyName": "DB Data Path",
-        "description": "",
-        "default": ""
+        "description": ""
       },
       "prettyName": {
         "type": "string",
+        "pattern": "^[^;\\&<>\\(\\)\\s]+$",
         "prettyName": "Identity Field",
-        "description": "Recommended : Couchbase<Port>",
-        "default": ""
+        "description": "Recommended : Couchbase<Port>"
       }
     },
     "nameField": "prettyName",
@@ -120,6 +128,8 @@
     "properties" : {
       "couchbasePort": {
         "type": "integer",
+        "minimum": 1,
+        "maximum": 65535,
         "prettyName": "Target Port Number",
         "description": "",
         "default": 8091
@@ -128,14 +138,24 @@
         "type": "string",
         "prettyName": "Mount Path",
         "format": "unixpath",
+        "pattern": "^\\/([^\\/\\0<>|*?\"\\\\;&$]+\\/)*([^\\/\\0<>|*?\"\\\\;&$]+)?\\/?$",
         "description": "",
-        "default": ""
+        "dxFormProperties": {
+          "validationMessages": {
+            "pattern": "Please provide a valid mount path."
+          }
+        }
       },
       "tgtClusterName": {
         "type": "string",
+        "pattern": "^[^;\\&<>\\(\\)\\s]+$",
         "prettyName": "Target Cluster Name",
         "description": "",
-        "default": ""
+        "dxFormProperties": {
+          "validationMessages": {
+            "pattern": "Cluster name must not contain spaces or any of these characters: ; & < > ( )"
+          }
+        }
       },
       "clusterRAMSize": {
         "type": "integer",
@@ -176,9 +196,15 @@
       },
       "couchbaseAdmin": {
         "type": "string",
+        "pattern": "^[^;\\&<>\\(\\)\\s]+$",
         "prettyName": "Target Couchbase Admin User",
         "description": "",
-        "default": "Administrator"
+        "default": "Administrator",
+        "dxFormProperties": {
+          "validationMessages": {
+            "pattern": "Username must not contain spaces or any of these characters: ; & < > ( )"
+          }
+        }
       },
       "couchbaseAdminPassword": {
         "type": "string",
@@ -188,23 +214,23 @@
         "default": ""
       },
       "fts_service": {
-          "default": true,
-          "type": "boolean",
-          "prettyName": "FTS Service",
-          "description": ""
-        },
-        "analytics_service": {
-          "default": true,
-          "type": "boolean",
-          "prettyName": "Analytics Service",
-          "description": ""
-        },
-        "eventing_service": {
-          "default": true,
-          "type": "boolean",
-          "prettyName": "Eventing Service",
-          "description": ""
-        },
+        "default": true,
+        "type": "boolean",
+        "prettyName": "FTS Service",
+        "description": ""
+      },
+      "analytics_service": {
+        "default": true,
+        "type": "boolean",
+        "prettyName": "Analytics Service",
+        "description": ""
+      },
+      "eventing_service": {
+        "default": true,
+        "type": "boolean",
+        "prettyName": "Eventing Service",
+        "description": ""
+      },
       "node_list": {
         "type": "array",
         "prettyName": "Additional Nodes",
@@ -230,9 +256,15 @@
                 },
                 "node_addr": {
                   "type": "string",
+                  "pattern": "^(([1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.([1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])|([a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?\\.)*(localhost|[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?))$",
+                  "maxLength": 255,
                   "prettyName": "Node hostname / IP",
                   "description": "",
-                  "default": ""
+                  "dxFormProperties": {
+                    "validationMessages": {
+                      "pattern": "Please provide a valid hostname or IP address."
+                    }
+                  }
                 },
                 "fts_service": {
                   "default": false,
@@ -310,12 +342,20 @@
       },
       "couchbaseHost": {
         "type": "string",
+        "pattern": "^(([1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.([1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])|([a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?\\.)*(localhost|[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?))$",
+        "maxLength": 255,
         "prettyName": "Staging Couchbase Host",
         "description": "",
-        "default": ""
+        "dxFormProperties": {
+          "validationMessages": {
+            "pattern": "Please provide a valid IP address or hostname."
+          }
+        }
       },
       "couchbasePort": {
         "type": "integer",
+        "minimum": 1,
+        "maximum": 65535,
         "prettyName": "Staging Port Number",
         "description": "",
         "default": 8091
@@ -323,36 +363,64 @@
       "couchbaseBakLoc": {
         "type": "string",
         "format": "unixpath",
+        "pattern": "^$|^\\/([^\\/\\0<>|*?\"\\\\;&$]+\\/)*([^\\/\\0<>|*?\"\\\\;&$]+)?\\/?$",
         "prettyName": "Backup Location",
         "description": "Backups taken via cbbackupmgr",
-        "default": ""
+        "default": "",
+        "dxFormProperties": {
+          "validationMessages": {
+            "pattern": "Please provide a valid backup path (leave empty for XDCR)."
+          }
+        }
       },
       "archiveName": {
         "type": "string",
-        "format": "unixpath",
+        "pattern": "^$|^[^;\\&<>\\(\\)\\s]+$",
+        "maxLength": 100,
         "prettyName": "Backup Archive Name",
         "description": "Archive Name for Backups taken",
-        "default": ""
+        "default": "",
+        "dxFormProperties": {
+          "validationMessages": {
+            "pattern": "Please provide a valid archive name (leave empty for XDCR)."
+          }
+        }
       },
       "couchbaseBakRepo": {
         "type": "string",
-        "format": "unixpath",
+        "pattern": "^$|^[^;\\&<>\\(\\)\\s]+$",
+        "maxLength": 100,
         "prettyName": "Backup Repository",
         "description": "Repository used by cbbackupmgr",
-        "default": ""
+        "default": "",
+        "dxFormProperties": {
+          "validationMessages": {
+            "pattern": "Please provide a valid repository name (leave empty for XDCR)."
+          }
+        }
       },
       "mountPath": {
         "type": "string",
         "format": "unixpath",
+        "pattern": "^\\/([^\\/\\0<>|*?\"\\\\;&$]+\\/)*([^\\/\\0<>|*?\"\\\\;&$]+)?\\/?$",
         "prettyName": "Mount Path",
         "description": "",
-        "default": ""
+        "dxFormProperties": {
+          "validationMessages": {
+            "pattern": "Please provide a valid mount path."
+          }
+        }
       },
       "stgClusterName": {
         "type": "string",
+        "pattern": "^[^;\\&<>\\(\\)\\s]+$",
         "prettyName": "Staging Cluster Name",
         "description": "",
-        "default": ""
+        "dxFormProperties": {
+          "validationMessages": {
+            "pattern": "Cluster name must not contain spaces or any of these characters: ; & < > ( )"
+          }
+        }
       },
       "clusterRAMSize": {
         "type": "integer",
@@ -408,9 +476,14 @@
            "properties": {
              "bname": {
                "type": "string",
+               "pattern": "^[^;\\&<>\\(\\)\\s]+$",
+               "maxLength": 100,
                "prettyName": "Bucket Name",
-               "default": "",
-               "maxLength": 40
+               "dxFormProperties": {
+                 "validationMessages": {
+                   "pattern": "Please provide a valid bucket name."
+                 }
+               }
              },
              "bsize": {
                "type": "integer",
@@ -424,9 +497,15 @@
        },
       "couchbaseAdmin": {
         "type": "string",
+        "pattern": "^[^;\\&<>\\(\\)\\s]+$",
         "prettyName": "Staging Couchbase Admin User",
         "description": "",
-        "default": "Administrator"
+        "default": "Administrator",
+        "dxFormProperties": {
+          "validationMessages": {
+            "pattern": "Username must not contain spaces or any of these characters: ; & < > ( )"
+          }
+        }
       },
       "couchbaseAdminPassword": {
         "type": "string",
@@ -437,9 +516,15 @@
       },
       "xdcrAdmin": {
         "type": "string",
+        "pattern": "^[^;\\&<>\\(\\)\\s]+$",
         "prettyName": "Source Couchbase XDCR Admin User",
         "description": "",
-        "default": "Administrator"
+        "default": "Administrator",
+        "dxFormProperties": {
+          "validationMessages": {
+            "pattern": "Username must not contain spaces or any of these characters: ; & < > ( )"
+          }
+        }
       },
       "xdcrAdminPassword": {
         "type": "string",
@@ -481,9 +566,14 @@
           "properties": {
             "bucketName": {
               "type": "string",
+              "pattern": "^[^;\\&<>\\(\\)\\s]+$",
+              "maxLength": 100,
               "prettyName": "Bucket Name",
-              "default": "",
-              "maxLength": 40
+              "dxFormProperties": {
+                "validationMessages": {
+                  "pattern": "Please provide a valid bucket name."
+                }
+              }
             }
           }
         }
