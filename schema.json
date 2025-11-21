@@ -85,7 +85,7 @@
       },
       "prettyName": {
         "type": "string",
-        "pattern": "^[^;\\&<>\\(\\)\\s]+$",
+        "pattern": "^[^;\\&<>\\(\\)]+$",
         "prettyName": "Identity Field",
         "description": "Recommended : Couchbase<Port>"
       }
