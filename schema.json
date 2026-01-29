@@ -79,7 +79,7 @@
       "dbPath": {
         "type": "string",
         "format": "unixpath",
-        "pattern": "^\\/([^\\/\\0<>|*?\"\\\\;&$]+\\/)*([^\\/\\0<>|*?\"\\\\;&$]+)?\\/?$",
+        "pattern": "^(?:\\/$|\\/(?:[^\\/\\x00-\\x1F\\x7F<>|*?\\\\;&$`% ]+(?:\\/|$))+$)$",
         "prettyName": "DB Data Path",
         "description": ""
       },
@@ -138,7 +138,7 @@
         "type": "string",
         "prettyName": "Mount Path",
         "format": "unixpath",
-        "pattern": "^\\/([^\\/\\0<>|*?\"\\\\;&$]+\\/)*([^\\/\\0<>|*?\"\\\\;&$]+)?\\/?$",
+        "pattern": "^(?:\\/$|\\/(?:[^\\/\\x00-\\x1F\\x7F<>|*?\\\\;&$`% ]+(?:\\/|$))+$)$",
         "description": "",
         "dxFormProperties": {
           "validationMessages": {
@@ -148,7 +148,7 @@
       },
       "tgtClusterName": {
         "type": "string",
-        "pattern": "^[^;\\&<>\\(\\)\\s]+$",
+        "pattern": "^[^;\\&<>\\(\\)\\s\\`]+$",
         "prettyName": "Target Cluster Name",
         "description": "",
         "dxFormProperties": {
@@ -196,7 +196,7 @@
       },
       "couchbaseAdmin": {
         "type": "string",
-        "pattern": "^[^;\\&<>\\(\\)\\s]+$",
+        "pattern": "^[^;\\&<>\\(\\)\\s\\`]+$",
         "prettyName": "Target Couchbase Admin User",
         "description": "",
         "default": "Administrator",
@@ -363,7 +363,7 @@
       "couchbaseBakLoc": {
         "type": "string",
         "format": "unixpath",
-        "pattern": "^$|^\\/([^\\/\\0<>|*?\"\\\\;&$]+\\/)*([^\\/\\0<>|*?\"\\\\;&$]+)?\\/?$",
+        "pattern": "^(?:$|(?:\\/$|\\/(?:[^\\/\\x00-\\x1F\\x7F<>|*?\\\\;&$`% ]+(?:\\/|$))+$))$",
         "prettyName": "Backup Location",
         "description": "Backups taken via cbbackupmgr",
         "default": "",
@@ -402,7 +402,7 @@
       "mountPath": {
         "type": "string",
         "format": "unixpath",
-        "pattern": "^\\/([^\\/\\0<>|*?\"\\\\;&$]+\\/)*([^\\/\\0<>|*?\"\\\\;&$]+)?\\/?$",
+        "pattern": "^(?:\\/$|\\/(?:[^\\/\\x00-\\x1F\\x7F<>|*?\\\\;&$`% ]+(?:\\/|$))+$)$",
         "prettyName": "Mount Path",
         "description": "",
         "dxFormProperties": {
@@ -413,7 +413,7 @@
       },
       "stgClusterName": {
         "type": "string",
-        "pattern": "^[^;\\&<>\\(\\)\\s]+$",
+        "pattern": "^[^;\\&<>\\(\\)\\s\\`]+$",
         "prettyName": "Staging Cluster Name",
         "description": "",
         "dxFormProperties": {
@@ -476,7 +476,7 @@
            "properties": {
              "bname": {
                "type": "string",
-               "pattern": "^[^;\\&<>\\(\\)\\s]+$",
+               "pattern": "^[^;\\&<>\\(\\)\\s\\`]+$",
                "maxLength": 100,
                "prettyName": "Bucket Name",
                "dxFormProperties": {
@@ -497,7 +497,7 @@
        },
       "couchbaseAdmin": {
         "type": "string",
-        "pattern": "^[^;\\&<>\\(\\)\\s]+$",
+        "pattern": "^[^;\\&<>\\(\\)\\s\\`]+$",
         "prettyName": "Staging Couchbase Admin User",
         "description": "",
         "default": "Administrator",
@@ -516,7 +516,7 @@
       },
       "xdcrAdmin": {
         "type": "string",
-        "pattern": "^[^;\\&<>\\(\\)\\s]+$",
+        "pattern": "^[^;\\&<>\\(\\)\\s\\`]+$",
         "prettyName": "Source Couchbase XDCR Admin User",
         "description": "",
         "default": "Administrator",
@@ -566,7 +566,7 @@
           "properties": {
             "bucketName": {
               "type": "string",
-              "pattern": "^[^;\\&<>\\(\\)\\s]+$",
+              "pattern": "^[^;\\&<>\\(\\)\\s\\`]+$",
               "maxLength": 100,
               "prettyName": "Bucket Name",
               "dxFormProperties": {
