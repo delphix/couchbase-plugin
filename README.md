@@ -1,3 +1,7 @@
+# This repository is archived and no longer maintained. Delphix offers a fully supported Couchbase Select Connector — contact your Delphix Customer Success team for more information.
+
+---
+
 ![](images/image1.png) 
 
 
