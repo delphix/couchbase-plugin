@@ -1,39 +1,54 @@
 #
-# Copyright (c) 2020 by Delphix. All rights reserved.
+# Copyright (c) 2020-2023 by Delphix. All rights reserved.
 #
 
-#######################################################################################################################
+##############################################################################
 """
 There are two purposes which this module is created for:
 Purpose1:
- This class is being used by child classes to initialize their attributes. Child classes of this are :
- _bucket.py,_cb_backup.py, _cluster.py, _replication.py, _xdcr.py. To add any new feature let say 'X', create a class
+ This class is being used by child classes to initialize their attributes.
+ Child classes of this are :
+ _bucket.py,_cb_backup.py, _cluster.py, _replication.py, _xdcr.py. To add any
+ new feature let say 'X', create a class
  for that 'X' feature in x module and make the Resource class as parent for X.
  Here we are using builder design pattern to initialize the properties.
  Reason of using this approach:
- 1: No need fixed combinations of objects
- There could be multiple attributes combinations based on their availability. Possible combinations are like objects of
- ('repository' + 'virtual_source' )or (' repository' +'staged_source'). Instead of creating multiple constructors,
-  followed this approach in which whatever the parameters available to object creator, pass only those.
+ 1: No need fixed combinations of objects.
+ There could be multiple attributes combinations based on their availability.
+ Possible combinations are like objects of
+ ('repository' + 'virtual_source' )or (' repository' +'staged_source').
+ Instead of creating multiple constructors,
+  followed this approach in which whatever the parameters available to object
+  creator, pass only those.
  Remaining class attributes will be set as 'None'.
- To create object use below format, type of obj is Resource. `Example`:
- obj=Resource.ObjectBuilder().set_snapshot_parameters("SnapshotParams").set_snapshot("Snapshot").set_dsource(False).build()
- Also we must end the object creation with build(), after which only ObjectBuilder will get to know about no more
+ To create object use below format, type of obj is Resource.
+ `Example`:
+ obj=Resource.ObjectBuilder().set_snapshot_parameters("SnapshotParams").
+ set_snapshot("Snapshot").set_dsource(False).build()
+ Also we must end the object creation with build(), after which only
+ ObjectBuilder will get to know about no more
  attributes to set.
- 2: No need to remember which constructor should be called for any particular purpose
+ 2: No need to remember which constructor should be called for any particular
+ purpose
  3: No need to remember the order of parameters
- 4: If you want to add other parameters in this class, refactoring will be easier in this approach
+ 4: If you want to add other parameters in this class, refactoring will be
+ easier in this approach
 
 Part2:
- __metaclass__ of this class is DatabaseExceptionHandlerMeta. All child classes of Resource will automatically
- inherit this property. Child classes will be decorated with small features for now, which we can scale.
+ __metaclass__ of this class is DatabaseExceptionHandlerMeta. All child classes
+  of Resource will automatically
+ inherit this property. Child classes will be decorated with small features for
+  now, which we can scale.
  Current usage: more readable logs and handling of ignorable exceptions.
- Basically there is a decorator(inside metaclass) which is being applied on all methods defined inside the child class.
- Through this design, no need to write decorators on top of each function manually.
+ Basically there is a decorator(inside metaclass) which is being applied on all
+  methods defined inside the child class.
+ Through this design, no need to write decorators on top of each function
+ manually.
 """
-#######################################################################################################################
+##############################################################################
 
 import logging
+
 from controller.db_exception_handler import DatabaseExceptionHandlerMeta
 
 logger = logging.getLogger(__name__)
@@ -44,14 +59,20 @@ class Resource(object):
 
     def __init__(self, builder):
         """
-        It requires the builder object to initialize the parameters of this class.
+        It requires the builder object to initialize the parameters of this
+        class.
         builder is object of inner class: ObjectBuilder
         :param builder:
         :return Object of Resource
         """
-        # Validating the type of builder. It must be of two type (type or Resource). Else it will raise an Exception for
+        # Validating the type of builder. It must be of two type
+        # (type or Resource). Else it will raise an Exception for
         # other cases like string, int or object of any other class.
-        if isinstance(builder, type) or isinstance(builder, Resource) or builder.__class__.__name__ == 'Resource':
+        if (
+            isinstance(builder, type)
+            or isinstance(builder, Resource)
+            or builder.__class__.__name__ == "Resource"
+        ):
             self.connection = builder.connection
             self.repository = builder.repository
             self.source_config = builder.source_config
@@ -62,13 +83,20 @@ class Resource(object):
             self.dSource = builder.dSource
             self.parameters = builder.parameters
         else:
-            logger.debug("Error, Expected builder object, Found: {} ".format(type(builder)))
+            logger.debug(
+                "Error, Expected builder object, Found: {} ".format(
+                    type(builder)
+                )
+            )
             raise Exception(
-                "Failed to initialize the Resource object. Expected: ObjectBuilder, Found: {} ".format(type(builder)))
+                "Failed to initialize the Resource object. Expected: "
+                "ObjectBuilder, Found: {} ".format(type(builder))
+            )
 
     class ObjectBuilder(object):
         # Below are the same parameters which is required in Resource class
-        # All setters must be decorated with classmethod, because there will not be any instance of ObjectBuilder
+        # All setters must be decorated with classmethod, because there will
+        # not be any instance of ObjectBuilder
         connection = None
         repository = None
         source_config = None
@@ -127,21 +155,32 @@ class Resource(object):
             cls.dSource = is_dSource
             return cls
 
-        # it must be last step in order to provide the outer class object(Resource)
+        # it must be last step in order to provide the outer class
+        # object(Resource)
         @classmethod
         def build(cls):
             if cls.dSource is None:
-                raise Exception("If this object is for dSource then set True else set it False")
+                raise Exception(
+                    "If this object is for dSource then set True else set "
+                    "it False"
+                )
             return Resource(cls)
 
     def __repr__(self):
         """
-        overriding the __repr__ method. To print contents of Resource object, use print(obj)
+        overriding the __repr__ method. To print contents of Resource object,
+        use print(obj)
         :return:None
         """
-        return "\nObjectBuilder(connection: {0.connection!r}, repository: {0.repository!r}, \n source_config: {0.source_config!r}, snapshot_parameters:{0.snapshot_parameters!r},\
-                staged_source: {0.staged_source!r}, virtual_source:{0.virtual_source!r}, snapshot: {0.snapshot!r}, parameters:{0.parameters!r},dSource: {0.dSource!r})".format(
-            self)
+        return (
+            "\nObjectBuilder(connection: {0.connection!r}, repository: "
+            "{0.repository!r}, \n source_config: {0.source_config!r}, "
+            "snapshot_parameters:{0.snapshot_parameters!r},\
+                staged_source: {0.staged_source!r}, "
+            "virtual_source:{0.virtual_source!r}, snapshot: "
+            "{0.snapshot!r}, parameters:{0.parameters!r},dSource: "
+            "{0.dSource!r})".format(self)
+        )
 
     def __str__(self):
         return repr(self)

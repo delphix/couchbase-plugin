@@ -1,6 +1,0 @@
-arrange:
-  - Overview: 'index.md'
-  - [Installation]: 'Installation.md'
-  - Discovery: 'Discovery.md'
-  - Linking: 'Linking.md'
-  - Provisioning: 'Provisioning.md'
