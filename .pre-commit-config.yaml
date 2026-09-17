@@ -1,0 +1,40 @@
+repos:
+-   repo: https://github.com/psf/black
+    rev: 22.3.0
+    hooks:
+    - id: black
+      exclude: >
+        (?x)^(
+        )$
+      args: [--line-length=79]
+-   repo: https://github.com/pycqa/flake8
+    rev: 3.9.2
+    hooks:
+    - id: flake8
+      exclude: >
+        (?x)^(
+        )$
+- repo: local
+  hooks:
+    - id: copyright
+      name: copyright
+      entry: copyright.sh
+      language: script
+      types: [text]
+      exclude: >
+          (?x)^(
+                  .flake8|
+                  .pre-commit-config.yaml|
+                  pyproject.toml|
+                  schema.json|
+                  .*__init__.py|
+                  src/templates/service_file_template.txt|
+                  src/config/logger_conf.ini|
+                  README.md|
+                  .github/workflows/codeql.yml|
+                  .github/CODEOWNERS|
+                  .isort.cfg|
+                  LICENSE|
+                  .gitignore|
+                  plugin_config.yml
+          )$
